@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgroGuard HBTU — Complete Project Report &amp; Second-Turn Viva Guide</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f8fafc;
+      --border: #e2e8f0;
+      --ink: #0f172a;
+      --muted: #475569;
+      --navy: #1f497d;
+      --green: #166534;
+      --green-soft: #f0fdf4;
+      --blue-soft: #eff6ff;
+      --amber-soft: #fffbeb;
+      --amber: #b45309;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f1f5f9;
+      color: var(--ink);
+      font-family: 'Segoe UI', Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .toolbar-title {
+      font-weight: 700;
+      color: var(--navy);
+      font-size: 14px;
+    }
+
+    .print-btn {
+      background: var(--navy);
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .print-btn:hover { background: #16365d; }
+
+    .page {
+      max-width: 920px;
+      margin: 24px auto;
+      background: var(--bg);
+      padding: 44px 48px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+    }
+
+    .cover {
+      border-bottom: 3px solid var(--navy);
+      padding-bottom: 22px;
+      margin-bottom: 26px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      margin: 0 0 8px 0;
+      font-size: 26px;
+      line-height: 1.22;
+      color: var(--navy);
+    }
+
+    .subtitle {
+      margin: 0 0 16px 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px 16px;
+      font-size: 13px;
+    }
+
+    .meta-grid strong { color: var(--navy); }
+
+    h2 {
+      margin: 28px 0 10px 0;
+      font-size: 18px;
+      color: var(--navy);
+      border-left: 4px solid var(--green);
+      padding-left: 10px;
+      page-break-after: avoid;
+    }
+
+    h3 {
+      margin: 16px 0 6px 0;
+      font-size: 14.5px;
+      color: var(--ink);
+      page-break-after: avoid;
+    }
+
+    p { margin: 0 0 10px 0; }
+
+    ul { margin: 6px 0 12px 20px; padding: 0; }
+    li { margin-bottom: 5px; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 12px 0;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 12px 0;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 13px 15px;
+      background: var(--surface);
+      page-break-inside: avoid;
+    }
+
+    .card.green { background: var(--green-soft); border-color: #bbf7d0; }
+    .card.blue { background: var(--blue-soft); border-color: #bfdbfe; }
+    .card.amber { background: var(--amber-soft); border-color: #fde68a; }
+
+    .card-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--navy);
+      margin-bottom: 5px;
+    }
+
+    .callout {
+      border: 1px solid #bfdbfe;
+      background: var(--blue-soft);
+      border-left: 4px solid var(--navy);
+      border-radius: 4px;
+      padding: 12px 14px;
+      margin: 12px 0;
+      page-break-inside: avoid;
+    }
+
+    .callout-label {
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 16px 0;
+      font-size: 12.5px;
+      page-break-inside: auto;
+    }
+
+    tr { page-break-inside: avoid; }
+
+    th {
+      background: var(--navy);
+      color: #ffffff;
+      text-align: left;
+      padding: 7px 9px;
+      font-weight: 600;
+    }
+
+    td {
+      border-bottom: 1px solid var(--border);
+      padding: 6px 9px;
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td { background: #f8fafc; }
+
+    .num { text-align: right; font-variant-numeric: tabular-nums; }
+    .center { text-align: center; }
+
+    .diagram-box {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px;
+      background: #ffffff;
+      margin: 12px 0 16px 0;
+      page-break-inside: avoid;
+    }
+
+    .diagram-caption {
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--muted);
+      margin-top: 6px;
+      font-style: italic;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      background: #e2e8f0;
+      color: #1e293b;
+    }
+
+    .badge.green { background: #dcfce7; color: #166534; }
+    .badge.navy { background: #dbeafe; color: #1e40af; }
+
+    code {
+      font-family: Consolas, monospace;
+      font-size: 12px;
+      background: #f1f5f9;
+      padding: 1px 5px;
+      border-radius: 3px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      font-size: 11.5px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    @media print {
+      body { background: #ffffff; font-size: 12px; }
+      .toolbar { display: none; }
+      .page {
+        margin: 0;
+        padding: 0;
+        border: none;
+        box-shadow: none;
+        max-width: 100%;
+      }
+      .page-break { page-break-before: always; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <span class="toolbar-title">AgroGuard HBTU — Second-Turn Project Report &amp; Viva Explanation Sheet</span>
+    <button class="print-btn" onclick="window.print()">Print / Save as PDF</button>
+  </div>
+
+  <main class="page">
+    <!-- COVER -->
+    <section class="cover">
+      <div class="eyebrow">Department of Electrical Engineering · Harcourt Butler Technical University, Kanpur</div>
+      <h1>Design and Development of an AI-Based Electrical Support System for Crop Disease Identification and Mitigation</h1>
+      <p class="subtitle">
+        Second-Turn Technical Progress Report, Open-Source Software &amp; Firmware Readiness, Multi-Crop Variations, Budget Scaling &amp; Hardware Cost Estimate (UPCST Grant Scheme 2026–2027)
+      </p>
+
+      <div class="meta-grid">
+        <div><strong>Project Guide:</strong> Dr. Shailendra Kumar Bhasker (Asst. Prof., EE)</div>
+        <div><strong>Project In-Charge:</strong> Dr. Sanjiv Kumar (Professor, EE)</div>
+        <div><strong>Team Members:</strong> Ayush Agrawal (230105019), Trisha Singh (230105056)</div>
+        <div><strong>Team Members:</strong> Vipranshu Sachan (230105061), Yashraj Dhwaj Singh (230105064)</div>
+        <div><strong>Sanctioned Grant Target:</strong> Rs. 20,000/- (UPCST 2026–2027)</div>
+        <div><strong>Current Status:</strong> Software &amp; Firmware Ready · Hardware Procurement Next</div>
+      </div>
+    </section>
+
+    <!-- 1. EXECUTIVE SUMMARY FOR PROFESSOR -->
+    <h2>1. Plain-Language System Summary (How to Explain to the Professor)</h2>
+    <p>
+      Traditional crop monitoring fails because manual inspection is slow, while <strong>image-only AI models</strong> miss environmental triggers (humidity, dew, soil dryness) and <strong>sensor-only IoT nodes</strong> cannot confirm which exact pathogen is present. Our system solves both together in a <strong>4-stage electrical + AI pipeline</strong>:
+    </p>
+
+    <div class="callout">
+      <div class="callout-label">30-Second Viva Pitch</div>
+      &ldquo;Sir, we built an implementation-ready AIoT + Electrical Support prototype. <strong>Stage 1</strong> continuously monitors temperature, humidity, soil moisture, light, and NPK to compute a Disease Risk Score—keeping the camera and pump asleep to save battery. When risk crosses the threshold or an ultrasonic sensor detects a plant, <strong>Stage 2</strong> triggers the ESP32-CAM to capture a leaf image and classify the disease using an open-source MobileNetV2 + Grad-CAM model. <strong>Stage 3</strong> passes that decision through 5 electrical safety interlocks before driving a 12V pump via an IRLZ44N MOSFET. <strong>Stage 4</strong> uses an INA219 sensor to measure bus voltage, current, power, and actuator response time.&rdquo;
+    </div>
+
+    <!-- HANDMADE-STYLE SVG BLOCK DIAGRAM -->
+    <div class="diagram-box">
+      <svg viewBox="0 0 840 215" width="100%" xmlns="http://www.w3.org/2000/svg" style="font-family: Calibri, sans-serif;">
+        <!-- Stage 1 -->
+        <rect x="12" y="24" width="178" height="106" rx="8" fill="#f0fdf4" stroke="#166534" stroke-width="2"/>
+        <text x="101" y="46" text-anchor="middle" font-size="12" font-weight="bold" fill="#166534">STAGE 1: SENSING</text>
+        <text x="101" y="65" text-anchor="middle" font-size="11" fill="#0f172a">38-Pin ESP32 Controller</text>
+        <text x="101" y="82" text-anchor="middle" font-size="10.5" fill="#334155">DHT22 • Soil Moisture</text>
+        <text x="101" y="97" text-anchor="middle" font-size="10.5" fill="#334155">BH1750 • RS485 NPK</text>
+        <text x="101" y="112" text-anchor="middle" font-size="10.5" fill="#334155">HC-SR04 • IR Line</text>
+
+        <!-- Arrow 1->2 -->
+        <line x1="190" y1="77" x2="224" y2="77" stroke="#1f497d" stroke-width="2"/>
+        <polygon points="224,72 234,77 224,82" fill="#1f497d"/>
+
+        <!-- Stage 2 -->
+        <rect x="234" y="24" width="184" height="106" rx="8" fill="#eff6ff" stroke="#1f497d" stroke-width="2"/>
+        <text x="326" y="46" text-anchor="middle" font-size="12" font-weight="bold" fill="#1f497d">STAGE 2: AI VISION</text>
+        <text x="326" y="65" text-anchor="middle" font-size="11" fill="#0f172a">Triggered ESP32-CAM</text>
+        <text x="326" y="82" text-anchor="middle" font-size="10.5" fill="#334155">Risk ≥ 60% or Plant &lt; 32cm</text>
+        <text x="326" y="97" text-anchor="middle" font-size="10.5" fill="#334155">MobileNetV2 CNN (224×224)</text>
+        <text x="326" y="112" text-anchor="middle" font-size="10.5" fill="#334155">+ Grad-CAM Lesion Map</text>
+
+        <!-- Arrow 2->3 -->
+        <line x1="418" y1="77" x2="452" y2="77" stroke="#1f497d" stroke-width="2"/>
+        <polygon points="452,72 462,77 452,82" fill="#1f497d"/>
+
+        <!-- Stage 3 -->
+        <rect x="462" y="24" width="184" height="106" rx="8" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+        <text x="554" y="46" text-anchor="middle" font-size="12" font-weight="bold" fill="#b45309">STAGE 3: MITIGATION</text>
+        <text x="554" y="65" text-anchor="middle" font-size="11" fill="#0f172a">5 Safety Interlocks Gate</text>
+        <text x="554" y="82" text-anchor="middle" font-size="10.5" fill="#334155">IRLZ44N MOSFET PWM</text>
+        <text x="554" y="97" text-anchor="middle" font-size="10.5" fill="#334155">12V Pump + Nozzle Servo</text>
+        <text x="554" y="112" text-anchor="middle" font-size="10.5" fill="#334155">L298N 4WD Rover + OLED</text>
+
+        <!-- Arrow 3->4 -->
+        <line x1="646" y1="77" x2="680" y2="77" stroke="#1f497d" stroke-width="2"/>
+        <polygon points="680,72 690,77 680,82" fill="#1f497d"/>
+
+        <!-- Stage 4 -->
+        <rect x="690" y="24" width="138" height="106" rx="8" fill="#f8fafc" stroke="#334155" stroke-width="2"/>
+        <text x="759" y="46" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f172a">STAGE 4: EE EVAL</text>
+        <text x="759" y="65" text-anchor="middle" font-size="11" fill="#0f172a">INA219 Telemetry</text>
+        <text x="759" y="82" text-anchor="middle" font-size="10.5" fill="#334155">Bus Voltage (V)</text>
+        <text x="759" y="97" text-anchor="middle" font-size="10.5" fill="#334155">Current (A) &amp; Power (W)</text>
+        <text x="759" y="112" text-anchor="middle" font-size="10.5" fill="#334155">Latency (ms) &amp; Temp</text>
+
+        <!-- Power Bus Bottom Bar -->
+        <rect x="12" y="156" width="816" height="42" rx="6" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+        <text x="420" y="175" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#1f497d">
+          POWER SUBSYSTEM: 12V Rechargeable BMS Battery → Main Switch &amp; 5A Fuse → LM2596 Buck (5V / 3.3V Logic) + 12V Pump / L298N Bus
+        </text>
+        <text x="420" y="190" text-anchor="middle" font-size="10.5" fill="#475569">
+          Hardware Protection: 1N4007 Flyback Diode across Pump • Voltage Divider on HC-SR04 Echo • Hard Battery Cutoff &lt; 10.8V
+        </text>
+      </svg>
+      <div class="diagram-caption">Figure 1: End-to-End 4-Stage AIoT &amp; Electrical Support System Architecture</div>
+    </div>
+
+    <!-- 2. PROGRESS SINCE FIRST TURN -->
+    <h2>2. Progress Achieved Since First Presentation (Turn 1 → Turn 2)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:24%">Project Dimension</th>
+          <th style="width:36%">First Turn Status (Oct 2026)</th>
+          <th style="width:40%">Second Turn Status (Current — Implementation Ready)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>System Design</strong></td>
+          <td>Conceptual block diagram &amp; basic objectives</td>
+          <td>Complete GPIO pinout (38-pin ESP32 + ESP32-CAM), 12V/5V/3.3V circuit protection, and state machine</td>
+        </tr>
+        <tr>
+          <td><strong>AI &amp; Crop Code</strong></td>
+          <td>Literature survey of CNN &amp; ML papers</td>
+          <td>Working Python pipeline (<code>MobileNetV2 + Grad-CAM + GradientBoosting</code>) + TypeScript AI engine for 6 crops</td>
+        </tr>
+        <tr>
+          <td><strong>Embedded Firmware</strong></td>
+          <td>Planned Arduino IDE usage</td>
+          <td>Ready-to-flash <code>.ino</code> sketches for both ESP32 Main Controller &amp; ESP32-CAM with HTTP &amp; SD backup</td>
+        </tr>
+        <tr>
+          <td><strong>Control Software</strong></td>
+          <td>Planned basic dashboard</td>
+          <td>Full Next.js Command Center (Live Telemetry, AI Vision + Grad-CAM, Rover D-Pad, 5 Safety Interlocks, EE Analytics)</td>
+        </tr>
+        <tr>
+          <td><strong>Budget &amp; Scaling</strong></td>
+          <td>Initial Rs. 20,000 proposal table</td>
+          <td>21-item BOM verified (Core = ₹11,098) + 3-tier budget scaling roadmap ready for procurement</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 3. DECIDED CROPS & OPEN-SOURCE CODE -->
+    <h2>3. Decided Crops &amp; Open-Source Implementation Stack</h2>
+    <p>
+      Rather than a toy simulation, we use <strong>open-source, industry-standard code</strong> ready to connect directly to physical ESP32 hardware:
+    </p>
+    <div class="grid-2">
+      <div class="card green">
+        <div class="card-title">Decided Target Crops &amp; Diseases</div>
+        <ul>
+          <li><strong>Tomato:</strong> Late Blight (<em>Phytophthora infestans</em>), Early Blight (<em>Alternaria solani</em>)</li>
+          <li><strong>Rice:</strong> Leaf Blast (<em>Magnaporthe oryzae</em>)</li>
+          <li><strong>Wheat:</strong> Yellow / Stripe Rust (<em>Puccinia striiformis</em>)</li>
+          <li><strong>Mango &amp; Citrus:</strong> Anthracnose, Citrus Canker</li>
+        </ul>
+      </div>
+      <div class="card blue">
+        <div class="card-title">Open-Source Software &amp; Firmware Stack</div>
+        <ul>
+          <li><strong>Stage 1 ML:</strong> Python Scikit-Learn / XGBoost (Environmental Risk Score &amp; Leaf Wetness Index)</li>
+          <li><strong>Stage 2 Vision:</strong> TensorFlow/Keras <code>MobileNetV2</code> + <code>Grad-CAM</code> heatmap localization</li>
+          <li><strong>Embedded:</strong> Arduino C++ (<code>esp32_main_controller.ino</code>, <code>esp32_cam_node.ino</code>)</li>
+          <li><strong>Web Control Plane:</strong> Next.js (TypeScript) + REST APIs (<code>/api/telemetry</code>, <code>/api/ai/analyze-image</code>) + MQTT Worker</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 4. FOUR PROJECT VARIATIONS -->
+    <h2 class="page-break">4. Four Functional Variations &amp; Field Control Scope</h2>
+    <p>
+      The hardware-software architecture is modular—meaning the same rover and sensor node handles <strong>four distinct agricultural control problems</strong>:
+    </p>
+    <div class="grid-4">
+      <div class="card green">
+        <div class="card-title">1. Pest &amp; Fungal Disease Control</div>
+        <p>Triggers ESP32-CAM when humidity &gt; 80% and LWI &gt; 65%. Confirms visible lesions via CNN + Grad-CAM and actuates targeted fungicide mist at 75–85% MOSFET PWM duty.</p>
+      </div>
+      <div class="card blue">
+        <div class="card-title">2. Dryness / Irrigation Control</div>
+        <p>When Capacitive Soil Moisture drops below 30% during high solar Lux/temperature, the system triggers a clean-water irrigation pulse without dispensing chemical pesticide.</p>
+      </div>
+      <div class="card amber">
+        <div class="card-title">3. Fertilizer (NPK) Control</div>
+        <p>RS485 Soil NPK sensor detects Nitrogen/Potassium deficits and issues crop-specific foliar advisories—and blocks excess Nitrogen in Rice Blast cases to stop fungal spread.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">4. Humidity &amp; Canopy Micro-Climate Control</div>
+        <p>Computes Dew-Point Spread and Leaf Wetness Index (LWI) from DHT22 + BH1750 to warn farmers before spore germination occurs, advising overhead irrigation pause.</p>
+      </div>
+    </div>
+
+    <!-- 5. ELECTRICAL DESIGN & 5 INTERLOCKS -->
+    <h2>5. Electrical Engineering Core &amp; 5 Mandatory Safety Interlocks</h2>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Power Distribution &amp; Protection</div>
+        <ul>
+          <li><strong>Source:</strong> 12V Li-ion/LiFePO4 Battery Pack with BMS + Main Switch + 5A Fuse.</li>
+          <li><strong>Regulation:</strong> LM2596 DC-DC Buck Converter steps 12V down to 5.0V (ESP32, Servos, HC-SR04) and 3.3V logic.</li>
+          <li><strong>Actuator Drive:</strong> IRLZ44N Logic-Level MOSFET switches the 12V pump with a <strong>1N4007 flyback diode</strong> to suppress inductive spikes.</li>
+          <li><strong>EE Measurement:</strong> INA219 I2C shunt logs Voltage (V), Current (A), Power (W), Energy (Wh), and latency (ms).</li>
+        </ul>
+      </div>
+      <div class="card amber">
+        <div class="card-title">5 Safety Interlocks Before Pump Activation</div>
+        <ol style="margin:6px 0 0 18px; padding:0;">
+          <li><strong>AI Confidence Gate:</strong> Prediction confidence must be ≥ 75%.</li>
+          <li><strong>Battery Voltage Gate:</strong> Bus voltage ≥ 10.8V (prevents BMS deep-discharge cutoff).</li>
+          <li><strong>Tank Level Gate:</strong> Reservoir ≥ 10% (prevents dry-running the 12V pump).</li>
+          <li><strong>Cooldown Gate:</strong> ≥ 30s between sprays (prevents chemical over-application).</li>
+          <li><strong>Mode / E-Stop Gate:</strong> System must be in <code>AUTO</code> mode (no manual override / E-Stop).</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- 6. COMPLETE BOM & ESTIMATE -->
+    <h2>6. Hardware Components &amp; Cost Estimate (With Marketplace Reference Slots)</h2>
+    <p>
+      Below is the 21-item Bill of Materials from the UPCST proposal. Attach Amazon/Flipkart product screenshots next to each category in the presentation slides to validate live pricing.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th class="center" style="width:6%">S.No</th>
+          <th style="width:42%">Component</th>
+          <th class="center" style="width:7%">Qty</th>
+          <th class="num" style="width:13%">Total (Rs.)</th>
+          <th style="width:32%">Subsystem / Marketplace Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="center">1</td><td>ESP32 (38-Pin) Development Board</td><td class="center">1</td><td class="num">450</td><td>Main Control Unit (Amazon/Robu)</td></tr>
+        <tr><td class="center">2</td><td>ESP32-CAM + OV2640 Camera Module</td><td class="center">1</td><td class="num">675</td><td>Image Acquisition (Amazon/Robu)</td></tr>
+        <tr><td class="center">3</td><td>DHT22 Temp &amp; Humidity Sensor</td><td class="center">1</td><td class="num">175</td><td>Ambient Micro-Climate</td></tr>
+        <tr><td class="center">4</td><td>Secondary Temp &amp; Humidity Probe</td><td class="center">1</td><td class="num">200</td><td>Canopy/Soil Redundancy</td></tr>
+        <tr><td class="center">5</td><td>Capacitive Soil Moisture Sensor</td><td class="center">1</td><td class="num">200</td><td>Dryness / Irrigation Trigger</td></tr>
+        <tr><td class="center">6</td><td>BH1750 Light Intensity Sensor (I2C)</td><td class="center">1</td><td class="num">150</td><td>Lux / Dew Estimation</td></tr>
+        <tr><td class="center">7</td><td>HC-SR04 Ultrasonic Sensor</td><td class="center">1</td><td class="num">139</td><td>Obstacle &amp; Plant Detection</td></tr>
+        <tr><td class="center">8</td><td>IR Path-Following Sensor</td><td class="center">1</td><td class="num">149</td><td>Crop-Row Alignment</td></tr>
+        <tr><td class="center">9</td><td>0.96&quot; SSD1306 OLED + SD Card</td><td class="center">1</td><td class="num">300</td><td>Local Status Display &amp; Backup</td></tr>
+        <tr><td class="center">10</td><td>4WD Metal Chassis + Geared Motors + Wheels</td><td class="center">1</td><td class="num">2,500</td><td>Mobile Field Rover Base</td></tr>
+        <tr><td class="center">11</td><td>L298N Motor Drive Module</td><td class="center">1</td><td class="num">500</td><td>Dual H-Bridge 4WD Drive</td></tr>
+        <tr><td class="center">12</td><td>Wheel Encoders (4-Wheel Set)</td><td class="center">1</td><td class="num">580</td><td>RPM &amp; Distance Odometry</td></tr>
+        <tr><td class="center">13</td><td>Servo Motors (SG90 / MG995)</td><td class="center">5</td><td class="num">1,000</td><td>Cam Pan/Tilt + Spray Nozzle</td></tr>
+        <tr><td class="center">14</td><td>12V Rechargeable Battery Pack with BMS</td><td class="center">1</td><td class="num">1,350</td><td>Main Power Source</td></tr>
+        <tr><td class="center">15</td><td>LM2596 DC-DC Buck Converter</td><td class="center">1</td><td class="num">500</td><td>12V → 5V/3.3V Regulation</td></tr>
+        <tr><td class="center">16</td><td>INA219 Voltage &amp; Current Sensor</td><td class="center">1</td><td class="num">250</td><td>Electrical Power Evaluation</td></tr>
+        <tr><td class="center">17</td><td>12V Mini Water Pump</td><td class="center">1</td><td class="num">250</td><td>Targeted Spraying Unit</td></tr>
+        <tr><td class="center">18</td><td>IRLZ44N MOSFET Driver Module</td><td class="center">1</td><td class="num">150</td><td>PWM Pump Switching</td></tr>
+        <tr><td class="center">19</td><td>Small Tank, Spray Nozzle &amp; Valve</td><td class="center">1</td><td class="num">350</td><td>Liquid Storage &amp; Atomizer</td></tr>
+        <tr><td class="center">20</td><td>Main Switch &amp; 5A Fuse Assembly</td><td class="center">1</td><td class="num">300</td><td>Overcurrent Protection</td></tr>
+        <tr><td class="center">21</td><td>LED, Buzzer, Wires, Standoffs, Connectors</td><td class="center">1</td><td class="num">800</td><td>Alarm &amp; Mechanical Assembly</td></tr>
+        <tr>
+          <td colspan="3"><strong>Core Hardware Subtotal (Remaining ₹8,902 reserved for RS485 NPK Sensor, Battery Charger, IP65 Enclosure &amp; Field Trials)</strong></td>
+          <td class="num"><strong>₹11,098</strong></td>
+          <td><strong>Within ₹20,000 UPCST Grant</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 7. BUDGET SCALING -->
+    <h2 class="page-break">7. Budget-Wise Scaling Roadmap (3 Deployment Tiers)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:20%">Tier</th>
+          <th style="width:16%">Budget</th>
+          <th style="width:34%">Hardware Additions</th>
+          <th style="width:30%">Achievable Scope</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Tier 1: Lab Bench Prototype</strong></td>
+          <td><strong>~₹11,100</strong></td>
+          <td>Core 21-item BOM (ESP32, ESP32-CAM, DHT22, Soil, Light, 4WD Rover, 12V Pump, INA219)</td>
+          <td>Indoor potted &amp; plot validation, AI inference testing, electrical power &amp; latency profiling</td>
+        </tr>
+        <tr>
+          <td><strong>Tier 2: UPCST Grant Field Unit</strong></td>
+          <td><strong>₹20,000</strong></td>
+          <td>Tier 1 + <strong>RS485 Soil NPK Sensor</strong>, smart BMS charger, weatherproof IP65 housing, field consumables</td>
+          <td>Multi-crop university plot trials (Tomato, Rice, Wheat) with full NPK + vision fusion</td>
+        </tr>
+        <tr>
+          <td><strong>Tier 3: Commercial / Farm Scale</strong></td>
+          <td><strong>₹45,000 – ₹80,000+</strong></td>
+          <td><strong>Solar MPPT panel</strong>, <strong>LoRa / ESP-NOW</strong> (2 km range), BLDC motors, multi-nozzle boom, Edge TPU / Jetson</td>
+          <td>Autonomous multi-acre farm patrol, zero-grid solar operation, cloud fleet analytics</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 8. COURSE OF ACTION & TEAM DIVISION -->
+    <h2>8. Course of Action &amp; Branch-Wise Responsibility Explanation</h2>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Execution Timeline (6 Months)</div>
+        <ul>
+          <li><strong>Phase 1 (Done):</strong> Literature Survey, System Architecture &amp; UPCST Proposal</li>
+          <li><strong>Phase 2 (Done):</strong> Full-Stack Software, AI Engine &amp; ESP32 Firmware Ready</li>
+          <li><strong>Phase 3 (Next):</strong> Component Procurement (Amazon/Flipkart/Local) &amp; PCB/Chassis Wiring</li>
+          <li><strong>Phase 4:</strong> Integrated Lab &amp; Field Trials (Power, Accuracy &amp; Mitigation Effectiveness)</li>
+        </ul>
+      </div>
+      <div class="card green">
+        <div class="card-title">How to Explain Coding vs. Electrical Scope</div>
+        <p>
+          As <strong>Electrical Engineering</strong> students, our primary engineering contribution is power electronics (12V BMS, LM2596 buck regulation, IRLZ44N MOSFET gate drive + flyback protection), INA219 power/latency instrumentation, L298N motor control, and hardware safety interlocks. For the AI &amp; web dashboard layer, we leveraged <strong>open-source TensorFlow/PlantVillage models, Next.js, and CS/IT peer guidance</strong> so the software is already ready for hardware integration.
+        </p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>Dept. of Electrical Engineering · HBTU Kanpur (2026–2027)</span>
+      <span>AgroGuard AIoT Crop Disease &amp; Mitigation System</span>
+    </div>
+  </main>
+</body>
+</html>

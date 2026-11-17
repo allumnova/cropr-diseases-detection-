@@ -1,0 +1,86 @@
+services:
+  db:
+    image: timescale/timescaledb:latest-pg16
+    container_name: agroguard-timescaledb
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-agroguard2026}
+      POSTGRES_DB: ${POSTGRES_DB:-agroguard}
+    ports:
+      - "5432:5432"
+    volumes:
+      - timescaledb_data:/var/lib/postgresql/data
+      - ./docs/06-DATABASE-SCHEMA.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d agroguard"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mosquitto:
+    image: eclipse-mosquitto:2
+    container_name: agroguard-mqtt-broker
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./docker/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+
+  ai-service:
+    build:
+      context: .
+      dockerfile: ai-models/Dockerfile
+    container_name: agroguard-ai-service
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ai-models/models:/app/models
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agroguard-web
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      AGROGUARD_DEVICE_KEY: ${AGROGUARD_DEVICE_KEY:-hbtu-agroguard-2026}
+      AUTH_SECRET: ${AUTH_SECRET:-hbtu-ee-final-year-project-2026-secret-key}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-agroguard2026}@db:5432/${POSTGRES_DB:-agroguard}
+      AI_SERVICE_URL: http://ai-service:8000
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+    volumes:
+      - agroguard_data:/app/data
+    depends_on:
+      db:
+        condition: service_healthy
+      ai-service:
+        condition: service_started
+
+  mqtt-worker:
+    build:
+      context: .
+      dockerfile: docker/worker.Dockerfile
+    container_name: agroguard-mqtt-worker
+    restart: unless-stopped
+    environment:
+      MQTT_BROKER_URL: mqtt://mosquitto:1883
+      NEXT_PUBLIC_SERVER_URL: http://web:3000
+      AGROGUARD_DEVICE_KEY: ${AGROGUARD_DEVICE_KEY:-hbtu-agroguard-2026}
+    depends_on:
+      - mosquitto
+      - web
+
+volumes:
+  timescaledb_data:
+  agroguard_data:

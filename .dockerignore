@@ -1,0 +1,8 @@
+node_modules/
+.next/
+.git/
+data/*.json
+*.pdf
+*.pptx
+__pycache__/
+*.pyc
